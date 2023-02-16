@@ -18,18 +18,12 @@ class App extends Component {
     const postsFetch = fetch("https://jsonplaceholder.typicode.com/posts");
     const photosFetch = fetch("https://jsonplaceholder.typicode.com/photos");
 
-    const [postsResponse, photosResponse] = await Promise.all([
-      postsFetch,
-      photosFetch,
-    ]);
-    const [postsJson, photosJson] = await Promise.all([
-      postsResponse.json(),
-      photosResponse.json(),
-    ]);
+    const [postsJson, photosJson] = await Promise.all([postsFetch, photosFetch])
+      .then(responses => Promise.all(responses.map((res) => res.json())));
 
     const posts = postsJson.map((post, i) => ({
       ...post,
-      cover: photosJson[i],
+      cover: photosJson[i].url,
     }));
 
     this.setState({ posts });
@@ -38,16 +32,19 @@ class App extends Component {
   render() {
     const { posts } = this.state;
     return (
-      <div className="posts">
-        {posts.map((post) => (
-          <div key={post.id} className="post">
-            <div className="post-content">
-              <h2>{post.title}</h2>
-              <p>{post.body}</p>
+      <section className="container">
+        <div className="posts">
+          {posts.map((post) => (
+            <div key={post.id} className="post">
+              <img src={post.cover} alt={post.title}></img>
+              <div className="post-content">
+                <h2>{post.title}</h2>
+                <p>{post.body}</p>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </section>
     );
   }
 }
