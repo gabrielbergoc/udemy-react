@@ -13,7 +13,7 @@ const HomeFunc = () => {
   const [initialPageSize, setInitialPageSize] = useState(6);
   const [noMorePosts, setNoMorePosts] = useState(false);
   const [searchString, setSearchString] = useState("");
-  
+
   const extendPage = () => {
     setPageSize(pageSize + initialPageSize);
   };
@@ -43,7 +43,7 @@ const HomeFunc = () => {
 
   // executed only once (no dependencies)
   useEffect(() => {
-    console.log('oi')
+    console.log("oi");
     const loadAllPosts = async () => {
       const allPosts = await getPosts();
       setAllPosts(allPosts);
@@ -109,19 +109,32 @@ class Home extends Component {
   };
 
   extendPage = () => {
-    const { pageSize, initialPageSize } = this.state;
-    this.setState({ pageSize: pageSize + initialPageSize });
+
+    // setState(state: (prevState, prevProps) => any, callback?: () => void)
+    //
+    // This setState signature ensures all setState calls always receive the
+    // same state values. The callback is executed after all setState
+    // operations.
+    //
+    this.setState(
+      ({ pageSize, initialPageSize }) => ({
+        pageSize: pageSize + initialPageSize,
+      }),
+      () => console.log(this.state.pageSize)  // this prints the new state
+    );
+    console.log(this.state.pageSize); // this prints the old state
+
   };
 
   paginate = () => {
-    const { page, pageSize, allPosts } = this.state;
+    this.setState(({ page, pageSize, allPosts }) => {
+      const start = page * pageSize;
+      const end = start + pageSize;
 
-    const start = page * pageSize;
-    const end = start + pageSize;
-
-    this.setState({
-      posts: allPosts.slice(start, end),
-      noMorePosts: end >= allPosts.length,
+      return {
+        posts: allPosts.slice(start, end),
+        noMorePosts: end >= allPosts.length,
+      };
     });
   };
 
@@ -170,4 +183,4 @@ class Home extends Component {
   }
 }
 
-export default HomeFunc;
+export default Home;
