@@ -3,6 +3,7 @@ import "./styles.css";
 import { getPosts } from "../../utils";
 import Posts from "../../components/Posts";
 import Button from "../../components/Button";
+import SearchInput from "../../components/Input/Search";
 
 class Home extends Component {
   state = {
@@ -12,6 +13,7 @@ class Home extends Component {
     pageSize: 6,
     initialPageSize: 6,
     noMorePosts: false,
+    searchString: "",
   };
 
   // executed right after the component is first rendered in the DOM
@@ -35,15 +37,14 @@ class Home extends Component {
 
   paginate = () => {
     const { page, pageSize, allPosts } = this.state;
+
     const start = page * pageSize;
     const end = start + pageSize;
 
-    let noMorePosts = false;
-    if (end >= allPosts.length) {
-      noMorePosts = true;
-    }
-
-    this.setState({ posts: allPosts.slice(start, end), noMorePosts });
+    this.setState({
+      posts: allPosts.slice(start, end),
+      noMorePosts: end >= allPosts.length,
+    });
   };
 
   handleButton = () => {
@@ -51,15 +52,40 @@ class Home extends Component {
     this.paginate();
   };
 
+  handleChange = (e) => {
+    this.setState({ searchString: e.target.value });
+  };
+
   render() {
-    const { posts, noMorePosts } = this.state;
+    const { posts, allPosts, noMorePosts, searchString } = this.state;
+
+    const filteredPosts = !!searchString
+      ? allPosts.filter((post) =>
+          post.title.toLowerCase().includes(searchString.toLowerCase())
+        )
+      : posts;
 
     return (
       <section className="container">
-        <Posts posts={posts} />
+        <div className="search-container">
+          <SearchInput
+            handleChange={this.handleChange}
+            value={searchString}
+            placeholder="Search posts..."
+          />
+        </div>
+
+        {filteredPosts.length > 0 && <Posts posts={filteredPosts} />}
+        {filteredPosts.length === 0 && <p>No posts match the search.</p>}
 
         <div className="button-container">
-          <Button onClick={this.handleButton} disabled={noMorePosts} text="More posts..." />
+          {!searchString && (
+            <Button
+              onClick={this.handleButton}
+              disabled={noMorePosts}
+              text="More posts..."
+            />
+          )}
         </div>
       </section>
     );
