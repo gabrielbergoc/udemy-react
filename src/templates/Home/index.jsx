@@ -1,9 +1,87 @@
-import { Component } from "react";
+import { Component, useCallback, useEffect, useState } from "react";
 import "./styles.css";
 import { getPosts } from "../../utils";
 import Posts from "../../components/Posts";
 import Button from "../../components/Button";
 import SearchInput from "../../components/Input/Search";
+
+const HomeFunc = () => {
+  const [posts, setPosts] = useState([]);
+  const [allPosts, setAllPosts] = useState([]);
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState(6);
+  const [initialPageSize, setInitialPageSize] = useState(6);
+  const [noMorePosts, setNoMorePosts] = useState(false);
+  const [searchString, setSearchString] = useState("");
+  
+  const extendPage = () => {
+    setPageSize(pageSize + initialPageSize);
+  };
+
+  const paginate = useCallback((page, pageSize, allPosts) => {
+    const start = page * pageSize;
+    const end = start + pageSize;
+
+    setPosts(allPosts.slice(start, end));
+    setNoMorePosts(end >= allPosts.length);
+  }, []);
+
+  const handleButton = () => {
+    extendPage();
+    paginate();
+  };
+
+  const handleChange = (e) => {
+    setSearchString(e.target.value);
+  };
+
+  const filteredPosts = !!searchString
+    ? allPosts.filter((post) =>
+        post.title.toLowerCase().includes(searchString.toLowerCase())
+      )
+    : posts;
+
+  // executed only once (no dependencies)
+  useEffect(() => {
+    console.log('oi')
+    const loadAllPosts = async () => {
+      const allPosts = await getPosts();
+      setAllPosts(allPosts);
+    };
+
+    loadAllPosts();
+  }, []);
+
+  // executed everytime a dependency changes
+  useEffect(() => {
+    paginate(page, pageSize, allPosts);
+  }, [paginate, page, pageSize, allPosts]);
+
+  return (
+    <section className="container">
+      <div className="search-container">
+        <SearchInput
+          handleChange={handleChange}
+          value={searchString}
+          placeholder="Search posts..."
+        />
+      </div>
+
+      {filteredPosts.length > 0 && <Posts posts={filteredPosts} />}
+      {filteredPosts.length === 0 && <p>No posts match the search.</p>}
+
+      <div className="button-container">
+        {!searchString && (
+          <Button
+            onClick={handleButton}
+            disabled={noMorePosts}
+            text="More posts..."
+          />
+        )}
+      </div>
+    </section>
+  );
+};
 
 class Home extends Component {
   state = {
@@ -92,4 +170,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default HomeFunc;
