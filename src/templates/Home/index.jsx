@@ -157,7 +157,7 @@ class Home extends Component {
       : posts;
 
     return (
-      <section className="container">
+      <section className="container" data-testid="home-container">
         <div className="search-container">
           <SearchInput
             handleChange={this.handleChange}
