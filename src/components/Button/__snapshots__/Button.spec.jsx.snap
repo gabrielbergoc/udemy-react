@@ -4,6 +4,7 @@ exports[`<Button /> should match snapshot 1`] = `
 <div>
   <button
     class="button"
+    type="submit"
   >
     button text
   </button>
