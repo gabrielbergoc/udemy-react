@@ -1,4 +1,4 @@
-import "./styles.css";
+import './styles.css';
 
 const SearchInput = ({ handleChange, value, placeholder }) => (
   <input
@@ -6,7 +6,7 @@ const SearchInput = ({ handleChange, value, placeholder }) => (
     className="search-input"
     onChange={handleChange}
     value={value}
-    placeholder={placeholder ?? "Search..."}
+    placeholder={placeholder ?? 'Search...'}
   />
 );
 

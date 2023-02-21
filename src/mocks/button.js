@@ -1,6 +1,6 @@
 export const buttonProps = {
-  text: "button text",
-  title: "button title",
+  text: 'button text',
+  title: 'button title',
   onClick: jest.fn(),
   disabled: false,
-}
+};

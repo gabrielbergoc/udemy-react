@@ -1,5 +1,5 @@
 export const searchInputProps = {
-  value: "a value",
+  value: 'a value',
   handleChange: jest.fn(),
-  placeholder: "a placeholder",
-}
+  placeholder: 'a placeholder',
+};
