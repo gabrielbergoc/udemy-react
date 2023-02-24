@@ -9,17 +9,17 @@ exports[`<Posts /> should match snapshot 1`] = `
       class="post"
     >
       <img
-        alt="post 1 title"
+        alt="post #1 title"
         src="img/img1.png"
       />
       <div
         class="post-content"
       >
         <h2>
-          post 1 title
+          post #1 title
         </h2>
         <p>
-          post 1 body
+          post #1 body
         </p>
       </div>
     </div>
@@ -27,17 +27,17 @@ exports[`<Posts /> should match snapshot 1`] = `
       class="post"
     >
       <img
-        alt="post 2 title"
+        alt="post #2 title"
         src="img/img2.png"
       />
       <div
         class="post-content"
       >
         <h2>
-          post 2 title
+          post #2 title
         </h2>
         <p>
-          post 2 body
+          post #2 body
         </p>
       </div>
     </div>
@@ -45,17 +45,143 @@ exports[`<Posts /> should match snapshot 1`] = `
       class="post"
     >
       <img
-        alt="post 3 title"
+        alt="post #3 title"
         src="img/img3.png"
       />
       <div
         class="post-content"
       >
         <h2>
-          post 3 title
+          post #3 title
         </h2>
         <p>
-          post 3 body
+          post #3 body
+        </p>
+      </div>
+    </div>
+    <div
+      class="post"
+    >
+      <img
+        alt="post #4 title"
+        src="img/img4.png"
+      />
+      <div
+        class="post-content"
+      >
+        <h2>
+          post #4 title
+        </h2>
+        <p>
+          post #4 body
+        </p>
+      </div>
+    </div>
+    <div
+      class="post"
+    >
+      <img
+        alt="post #5 title"
+        src="img/img5.png"
+      />
+      <div
+        class="post-content"
+      >
+        <h2>
+          post #5 title
+        </h2>
+        <p>
+          post #5 body
+        </p>
+      </div>
+    </div>
+    <div
+      class="post"
+    >
+      <img
+        alt="post #6 title"
+        src="img/img6.png"
+      />
+      <div
+        class="post-content"
+      >
+        <h2>
+          post #6 title
+        </h2>
+        <p>
+          post #6 body
+        </p>
+      </div>
+    </div>
+    <div
+      class="post"
+    >
+      <img
+        alt="post #7 title"
+        src="img/img7.png"
+      />
+      <div
+        class="post-content"
+      >
+        <h2>
+          post #7 title
+        </h2>
+        <p>
+          post #7 body
+        </p>
+      </div>
+    </div>
+    <div
+      class="post"
+    >
+      <img
+        alt="post #8 title"
+        src="img/img8.png"
+      />
+      <div
+        class="post-content"
+      >
+        <h2>
+          post #8 title
+        </h2>
+        <p>
+          post #8 body
+        </p>
+      </div>
+    </div>
+    <div
+      class="post"
+    >
+      <img
+        alt="post #9 title"
+        src="img/img9.png"
+      />
+      <div
+        class="post-content"
+      >
+        <h2>
+          post #9 title
+        </h2>
+        <p>
+          post #9 body
+        </p>
+      </div>
+    </div>
+    <div
+      class="post"
+    >
+      <img
+        alt="post #10 title"
+        src="img/img10.png"
+      />
+      <div
+        class="post-content"
+      >
+        <h2>
+          post #10 title
+        </h2>
+        <p>
+          post #10 body
         </p>
       </div>
     </div>
